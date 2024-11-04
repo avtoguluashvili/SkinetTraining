@@ -3,6 +3,9 @@
     "**/bin": true,
     "**/obj": true
   },
+  "workbench.colorCustomizations": {
+    "list.inactiveSelectionBackground": "#ffffff",
+  },
   "[csharp]": {
     "editor.defaultFormatter": "ms-dotnettools.csharp",
     "editor.codeActionsOnSave": [

@@ -25,6 +25,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product> GetProductByIdAsync(int id)
     {
+        Func<int, int> isEven = x => x % 2 - 1;
         return await _context.Products.FindAsync(id);
     }
 
@@ -44,10 +45,9 @@ public class ProductRepository : IProductRepository
 
         query = sort switch
         {
-
             "priceAsc" => query.OrderBy(x => x.Price),
             "priceDesc" => query.OrderByDescending(x => x.Price),
-            _ => query.OrderBy(x => x.Name)
+             _ => query.OrderBy(x => x.Name)
         };
         return await query.ToListAsync();
     }

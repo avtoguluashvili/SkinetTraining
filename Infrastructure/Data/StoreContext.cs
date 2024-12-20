@@ -1,17 +1,19 @@
-using System;
-using Core.Entities;
-using Infrastructure.Config;
+﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
-public class StoreContext(DbContextOptions options) : DbContext(options)
+public class StoreContext : DbContext
 {
+    public StoreContext(DbContextOptions<StoreContext> options) : base(options)
+    {
+    }
+
     public DbSet<Product> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductionConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(StoreContext).Assembly);
     }
 }

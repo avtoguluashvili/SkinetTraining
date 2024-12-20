@@ -1,5 +1,4 @@
-using System;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Interfaces;
 
 namespace Infrastructure.Data;
@@ -10,7 +9,7 @@ public class SpecificationEvaluator<T> where T : BaseEntity
     {
         if (spec.Criteria != null)
         {
-            query = query.Where(spec.Criteria);
+            query = query.Where(spec.Criteria); // x => x.Brand == brand
         }
 
         if (spec.OrderBy != null)
@@ -18,29 +17,30 @@ public class SpecificationEvaluator<T> where T : BaseEntity
             query = query.OrderBy(spec.OrderBy);
         }
 
-        if (spec.OrderByDecending != null)
+        if (spec.OrderByDescending != null)
         {
-            query = query.OrderByDescending(spec.OrderByDecending);
+            query = query.OrderByDescending(spec.OrderByDescending);
         }
 
-        if (spec.OrderByDecending != null)
+        if (spec.IsDistinct) 
         {
-            query = query.OrderByDescending(spec.OrderByDecending);
+            query = query.Distinct();
         }
-
-        if (spec.IsPagingEnabled)
+        
+        if (spec.IsPagingEnabled) 
         {
             query = query.Skip(spec.Skip).Take(spec.Take);
         }
+
         return query;
     }
 
-    public static IQueryable<TResult> GetQuery<TSpec, TResult>(IQueryable<T> query,
-     ISpecification<T, TResult> spec)
+    public static IQueryable<TResult> GetQuery<TSpec, TResult>(IQueryable<T> query, 
+        ISpecification<T, TResult> spec)
     {
         if (spec.Criteria != null)
         {
-            query = query.Where(spec.Criteria);
+            query = query.Where(spec.Criteria); // x => x.Brand == brand
         }
 
         if (spec.OrderBy != null)
@@ -48,14 +48,9 @@ public class SpecificationEvaluator<T> where T : BaseEntity
             query = query.OrderBy(spec.OrderBy);
         }
 
-        if (spec.OrderByDecending != null)
+        if (spec.OrderByDescending != null)
         {
-            query = query.OrderByDescending(spec.OrderByDecending);
-        }
-
-        if (spec.IsDistinct)
-        {
-            query = query.Distinct();
+            query = query.OrderByDescending(spec.OrderByDescending);
         }
 
         var selectQuery = query as IQueryable<TResult>;
@@ -70,7 +65,7 @@ public class SpecificationEvaluator<T> where T : BaseEntity
             selectQuery = selectQuery?.Distinct();
         }
 
-        if (spec.IsPagingEnabled)
+        if (spec.IsPagingEnabled) 
         {
             selectQuery = selectQuery?.Skip(spec.Skip).Take(spec.Take);
         }

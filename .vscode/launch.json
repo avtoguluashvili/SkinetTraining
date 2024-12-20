@@ -1,46 +1,20 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
             "name": "C#: API Debug",
-            "type": "coreclr",
+            "type": "dotnet",
             "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/API/bin/Debug/net6.0/API.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/API",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/API/Views"
-            },
-            "dotnetRunMessages": true,
-            "launchBrowser": {
-                "enabled": true,
-                "args": "${auto-detect-url}",
-                "windows": {
-                    "command": "cmd.exe",
-                    "args": "/C start ${auto-detect-url}"
-                },
-                "linux": {
-                    "command": "xdg-open"
-                },
-                "osx": {
-                    "command": "open"
-                }
-            }
+            "projectPath": "${workspaceFolder}/API.csproj"
         },
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
+            "request": "attach"
         }
+
     ]
 }

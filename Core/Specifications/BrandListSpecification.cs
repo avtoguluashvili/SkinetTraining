@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Entities;
+﻿using Core.Entities;
 
-namespace Core.Specifications
+namespace Core.Specifications;
+
+public class BrandListSpecification : BaseSpecification<Product, string>
 {
-    public class BrandListSpecification : BaseSpecification<Product, string>
+    public BrandListSpecification()
     {
-        public BrandListSpecification()
-        {
-            AddSelect(x=> x.Brand);
-            ApplyDistinct();
-        }
+        AddSelect(x => x.Brand);
+        ApplyDistinct();
     }
 }
